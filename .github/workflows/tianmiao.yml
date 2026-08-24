@@ -16,5 +16,6 @@ jobs:
       - run: pip install requests -q
       - name: 更新节点
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          TM_INVITE_CODE: ${{ secrets.TM_INVITE_CODE }}
         run: python3 tianmiao_update.py

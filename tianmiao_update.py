@@ -3,7 +3,7 @@ import requests, uuid, time, random, urllib3, os, sys
 urllib3.disable_warnings()
 
 API = 'https://api.tianmiao.icu/api'
-INVITE = 'ghqhsqRD'
+INVITE = os.environ.get('TM_INVITE_CODE', '')
 FILENAME = 'tianmiao.txt'
 GIST_DESC = '天喵 VPN 节点（自动更新）'
 UA = ['okhttp/4.12.0', 'Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36']
@@ -133,3 +133,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
