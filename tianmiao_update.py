@@ -4,10 +4,9 @@ urllib3.disable_warnings()
 
 API = 'https://api.tianmiao.icu/api'
 INVITE = os.environ.get('TM_INVITE_CODE', '')
-FILENAME = 'tianmiao.txt'
-GIST_DESC = '天喵 VPN 节点（自动更新）'
+FILENAME = 'data.txt'
+GIST_DESC = '订阅（自动更新）'
 UA = ['okhttp/4.12.0', 'Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36']
-
 
 def hdr(tok=None, auth=None):
     h = {
@@ -19,7 +18,6 @@ def hdr(tok=None, auth=None):
     if tok and auth:
         h.update({'token': tok, 'authtoken': auth})
     return h
-
 
 def extract():
     s = requests.Session()
@@ -48,7 +46,6 @@ def extract():
                     urls.append(n['url'])
     return urls
 
-
 def find_gist_id(token):
     headers = {
         'Authorization': f'token {token}',
@@ -76,7 +73,6 @@ def find_gist_id(token):
         if len(gists) < 100:
             return None
         page += 1
-
 
 def upload_gist(content, token):
     headers = {
@@ -113,7 +109,6 @@ def upload_gist(content, token):
     print(f'{action} Gist 失败: {r.status_code} {r.text[:300]}')
     return None
 
-
 def main():
     token = os.environ.get('GITHUB_TOKEN') or (
         sys.argv[2] if len(sys.argv) > 2 and sys.argv[1] == '--token' else None
@@ -121,15 +116,14 @@ def main():
     if not token:
         print('缺少 GITHUB_TOKEN')
         sys.exit(1)
-    print('提取节点中...')
+    print('提取中...')
     urls = extract()
-    print(f'VIP 节点: {len(urls)} 个')
+    print(f'VIP : {len(urls)} 个')
     if not urls:
-        print('没有提取到节点，API 可能暂时异常')
+        print('没有提取到，API 可能暂时异常')
         sys.exit(1)
     content = '\n'.join(urls) + '\n'
     upload_gist(content, token)
-
 
 if __name__ == '__main__':
     main()
