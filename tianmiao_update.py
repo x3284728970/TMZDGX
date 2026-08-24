@@ -110,11 +110,11 @@ def upload_gist(content, token):
     return None
 
 def main():
-    token = os.environ.get('GITHUB_TOKEN') or (
+    token = os.environ.get('MY_GITHUB_TOKEN') or (
         sys.argv[2] if len(sys.argv) > 2 and sys.argv[1] == '--token' else None
     )
     if not token:
-        print('缺少 GITHUB_TOKEN')
+        print('缺少 MY_GITHUB_TOKEN')
         sys.exit(1)
     print('提取中...')
     urls = extract()
@@ -127,4 +127,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
